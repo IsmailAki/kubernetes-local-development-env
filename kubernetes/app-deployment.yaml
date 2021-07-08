@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-application
+  labels:
+    app: py-application
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: py-application
+  template:
+    metadata:
+      labels:
+        app: py-application
+    spec:
+      containers:
+      - name: py-application
+        image: abdullahaki/py-application:v0.0.1
