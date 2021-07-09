@@ -21,6 +21,9 @@ Vagrant.configure("2") do |config|
       config.vm.provision "k3s install script", type: "shell",
           path: "scripts/k3s.sh",
           args: args
+      config.vm.provision "kubernetes install script", type: "shell",
+          path: "scripts/kubernetes.sh",
+          args: args
     end
   end
 end
