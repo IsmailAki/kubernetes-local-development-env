@@ -3,5 +3,5 @@ secretGenerator:
   literals:
   - password=SomePassword
 resources:
-  - sql.yaml
-  - app.yaml
+  - mysql-deployment.yaml
+  - app-deployment.yaml
