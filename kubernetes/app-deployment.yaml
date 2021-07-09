@@ -1,3 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-application
+  labels:
+    app: py-application
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: py-application
+    tier: backend
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wp-pv-claim
+  labels:
+    app: py-application
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,18 +32,42 @@ metadata:
   labels:
     app: py-application
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: py-application
+      tier: backend
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: py-application
+        tier: backend
     spec:
       containers:
-      - name: py-application
-        image: abdullahaki/py-application:v0.0.2
+      - image: abdullahaki/py-application:v0.0.2
+        name: py-application
+        env:
+        - name: MYSQL_USERNAME
+          value: root
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        - name: MYSQL_INSTANCE_NAME
+          value: asd
+        - name: MYSQL_PORT_3306_TCP_ADDR
+          value: py-application-mysql
+        - name: MYSQL_PORT_3306_TCP_PORT
+          value: "3306"
         ports:
         - containerPort: 3000
-          hostPort: 3000
+          name: py-application
+        volumeMounts:
+        - name: py-application-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: py-application-persistent-storage
+        persistentVolumeClaim:
+          claimName: wp-pv-claim
