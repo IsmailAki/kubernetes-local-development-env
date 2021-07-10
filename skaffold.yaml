@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+  name: kubernetes-challenge
+build:
+  artifacts:
+  - image: abdullahaki/py-application
+    context: app
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kustomize:
+    paths:
+    - kubernetes
