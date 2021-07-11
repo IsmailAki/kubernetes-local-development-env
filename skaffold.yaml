@@ -8,6 +8,8 @@ build:
     context: app
     docker:
       dockerfile: Dockerfile
+      cacheFrom:
+      - "python:3.7-alpine3.13"
 deploy:
   kustomize:
     paths:
