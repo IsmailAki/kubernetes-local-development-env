@@ -11,19 +11,12 @@ Vagrant.configure("2") do |config|
       guest: 3000,
       host:  3000,
       auto_correct: true
-      
+    
     config.vm.provider "virtualbox" do |vb|
-        vb.name = "Ubuntu k3s"
-        vb.memory = "2048"
-        vb.cpus = "1"
-        
-      args = []
-      config.vm.provision "k3s install script", type: "shell",
-          path: "scripts/k3s.sh",
-          args: args
-      config.vm.provision "kubernetes install script", type: "shell",
-          path: "scripts/kubernetes.sh",
-          args: args
+      vb.name = "Ubuntu k3s"
+      vb.memory = "10000"
     end
+    config.vm.provision "k3s install script", type: "shell",
+      path: "scripts/k3s.sh"
+    end 
   end
-end
