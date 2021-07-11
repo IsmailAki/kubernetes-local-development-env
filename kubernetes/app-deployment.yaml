@@ -12,19 +12,6 @@ spec:
     tier: backend
   type: LoadBalancer
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: py-application-pv-claim
-  labels:
-    app: py-application
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,10 +51,3 @@ spec:
         ports:
         - containerPort: 3000
           name: py-application
-        volumeMounts:
-        - name: py-application-persistent-storage
-          mountPath: /var/www/html
-      volumes:
-      - name: py-application-persistent-storage
-        persistentVolumeClaim:
-          claimName: py-application-pv-claim
