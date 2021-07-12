@@ -43,7 +43,7 @@ When the code was changed with Skaffold, the deployment part was solved.
 ---
 ## How to use this environment
 
-Application addres is: localhost:3000
+Application address is: localhost:3000
 
 1. Docker login
 ```
