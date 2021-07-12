@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     
     config.vm.provider "virtualbox" do |vb|
       vb.name = "Ubuntu k3s"
-      vb.memory = "10000"
+      vb.memory = "4096"
     end
     config.vm.provision "k3s install script", type: "shell",
       path: "scripts/k3s.sh"
