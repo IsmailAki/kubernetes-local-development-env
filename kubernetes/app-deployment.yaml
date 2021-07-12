@@ -32,7 +32,7 @@ spec:
         tier: backend
     spec:
       containers:
-      - image: abdullahaki/py-application:v0.0.2
+      - image: abdullahaki/py-application:v0.0.3
         name: py-application
         env:
         - name: MYSQL_USERNAME
@@ -43,7 +43,7 @@ spec:
               name: mysql-pass
               key: password
         - name: MYSQL_INSTANCE_NAME
-          value: asd
+          value: somedb
         - name: MYSQL_PORT_3306_TCP_ADDR
           value: py-application-mysql
         - name: MYSQL_PORT_3306_TCP_PORT
