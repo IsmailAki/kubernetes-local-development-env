@@ -12,7 +12,6 @@ When the code was changed with Skaffold, the deployment part was solved.
 2. Pushing new image to docker hub.
 3. Kubernetes pulls and deploys new image.
 
-
 ---
 ## Why we used k3s?
 1. Lightweight Kubernetes development environment.
@@ -44,39 +43,51 @@ When the code was changed with Skaffold, the deployment part was solved.
 ---
 ## How to use this environment
 
-1. Clone this repo
+1. Docker login
+```
+    docker login
+```
+2. Create docker hub repo
+
+    https://hub.docker.com/repository/create
+    
+3. Clone this repo
 ```
     git clone https://github.com/AbdullahAki/Kubernetes-Challenge.git
 ```
-2. Go inside the repo
+4. Go inside the repo
 ```
     cd Kubernetes-Challenge
 ```
-3. Start Vagrant cluster
+5. Edit skaffold.yaml
+```
+#7  - image: username/docker-repo
+```
+6. Start Vagrant cluster
 ```
     vagrant up
 ```
-4. Get required authentication file
+7. Get required authentication file
 ```
     sudo chmod +x skaffold.sh && ./skaffold.sh
 ```
-5. If we are logged in and we want to do build and deploy your app every time your code changes
+8. If we are logged in and we want to do build and deploy your app every time your code changes
 ```
     skaffold --kubeconfig='k3s.yaml' dev
 ```
-7. If we want to build and deploy your App once
+9. If we want to build and deploy your App once
 ```
     skaffold --kubeconfig='k3s.yaml' run
 ```
-5.  If you want to see machine UI, you can SSH into the machine.
+10.  If you want to see machine UI, you can SSH into the machine.
 ```
     vagrant ssh
 ```
-6. Exit machine.
+11. Exit machine.
 ```
     exit
 ```
-8. Delete Vagrant cluster
+12. Delete Vagrant cluster
 ```
     vagrant destroy
 ```
